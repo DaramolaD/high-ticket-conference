@@ -1864,3 +1864,98 @@ footer {
   padding: 0 2rem 2rem;
   text-align: center;
 }
+
+/* YouTube Carousel Section */
+.section_container {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  margin: 2rem 0;
+}
+
+.youtube_section_cont {
+  width: 100%;
+  position: relative;
+}
+
+.carousel-wrapper {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-amber-500) var(--color-gray-800);
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.carousel-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.carousel-wrapper::-webkit-scrollbar-track {
+  background: var(--color-gray-800);
+  border-radius: var(--border-radius-full);
+}
+
+.carousel-wrapper::-webkit-scrollbar-thumb {
+  background-color: var(--color-amber-500);
+  border-radius: var(--border-radius-full);
+}
+
+.carousel-item {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 560px;
+  height: 315px;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.carousel-item iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.carousel-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.carousel-prev,
+.carousel-next {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: var(--color-gray-900);
+  border: 1px solid var(--color-gray-800);
+  color: var(--color-white);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.carousel-prev:hover,
+.carousel-next:hover {
+  background-color: var(--color-amber-500);
+  color: var(--color-black);
+  border-color: var(--color-amber-500);
+}
+
+@media (max-width: 768px) {
+  .carousel-item {
+    height: 240px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-item {
+    height: 200px;
+  }
+}
