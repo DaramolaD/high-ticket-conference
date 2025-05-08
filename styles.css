@@ -1071,7 +1071,7 @@ p {
   position: relative;
   width: 100%;
   height: 100%;
-  background-image: url(/hero.jpg);
+  background-image: url(./public/hero.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1498,7 +1498,7 @@ input:checked + .slider:before {
 
 /* Final CTA Section */
 .final-cta {
-  background: url("/conference.jpg") center / cover no-repeat;
+  background: url("./public/conference.jpg") center / cover no-repeat;
   position: relative;
 }
 
