@@ -46,6 +46,9 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     // Run animation on scroll
     window.addEventListener("scroll", animateOnScroll)
     
+    // Initialize the YouTube carousel
+    initCarousel()
+    
     // Enhanced mobile navigation - support both structures
     const navToggle = document.getElementById("navToggle")
     const mobileMenuToggle = document.querySelector(".mobile-menu-toggle")
@@ -567,4 +570,85 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         }
     });
   })
+  
+  // YouTube Carousel functionality
+  const initCarousel = () => {
+    const carousel = document.getElementById('carousel');
+    
+    if (carousel) {
+      const carouselWrapper = carousel;
+      const carouselItems = carouselWrapper.querySelectorAll('.carousel-item');
+      
+      if (carouselItems.length <= 1) return; // No need for carousel logic if only one item
+      
+      // Add navigation buttons to the carousel
+      const navButtons = document.createElement('div');
+      navButtons.className = 'carousel-nav';
+      navButtons.innerHTML = `
+        <button class="carousel-prev" aria-label="Previous">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button class="carousel-next" aria-label="Next">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      `;
+      
+      // Add after the wrapper
+      carouselWrapper.parentNode.appendChild(navButtons);
+      
+      // Add navigation functionality
+      const prevButton = navButtons.querySelector('.carousel-prev');
+      const nextButton = navButtons.querySelector('.carousel-next');
+      
+      // Calculate the scroll amount
+      const scrollAmount = carouselItems[0].offsetWidth + parseInt(getComputedStyle(carouselItems[0]).marginRight);
+      
+      // Navigate to previous item
+      prevButton.addEventListener('click', () => {
+        carouselWrapper.scrollBy({
+          left: -scrollAmount,
+          behavior: 'smooth'
+        });
+      });
+      
+      // Navigate to next item
+      nextButton.addEventListener('click', () => {
+        carouselWrapper.scrollBy({
+          left: scrollAmount,
+          behavior: 'smooth'
+        });
+      });
+      
+      // Add touch support
+      let touchStartX = 0;
+      let touchEndX = 0;
+      
+      carouselWrapper.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+      
+      carouselWrapper.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        
+        // Calculate swipe direction and scroll
+        if (touchStartX - touchEndX > 50) {
+          // Swipe left - move right
+          carouselWrapper.scrollBy({
+            left: scrollAmount,
+            behavior: 'smooth'
+          });
+        } else if (touchEndX - touchStartX > 50) {
+          // Swipe right - move left
+          carouselWrapper.scrollBy({
+            left: -scrollAmount,
+            behavior: 'smooth'
+          });
+        }
+      }, { passive: true });
+    }
+  };
   
