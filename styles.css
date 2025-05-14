@@ -318,6 +318,9 @@ p {
   .nav-cta {
     padding: 0.5rem 1.25rem !important;
   }
+  .container {
+    padding: 0 2rem;
+  }
 }
 
 /* Mobile Menu */
@@ -360,7 +363,7 @@ p {
   .nav-menu {
     display: block;
   }
-  
+
   .mobile-menu-toggle,
   .nav-toggle {
     display: none;
@@ -423,6 +426,12 @@ p {
 
 .btn .icon-arrow {
   margin-left: 0.5rem;
+}
+
+/* Hero */
+.heroGridCont {
+  display: grid;
+  gap: 1rem;
 }
 
 /* Cards */
@@ -1101,8 +1110,11 @@ p {
 }
 .hero-image {
   position: relative;
+  height: 500px;
+  display: flex;
+  align-items: flex-end;
+  margin-block-start: 50px;
   width: 100%;
-  height: 100%;
   background-image: url(./public/hero.jpg);
   background-size: cover;
   background-position: center;
@@ -1213,6 +1225,10 @@ input:checked + .slider:before {
 }
 
 @media (min-width: 768px) {
+  .hero-image {
+    height: 100%;
+    margin-block-start: 0px;
+  }
   .pricing-cards {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -1515,11 +1531,11 @@ input:checked + .slider:before {
   .location-cards {
     grid-template-columns: 1fr;
   }
-  
+
   .cta-content h2 {
     font-size: 2rem;
   }
-  
+
   .cta-content p {
     font-size: 1.125rem;
   }
@@ -1597,7 +1613,7 @@ input:checked + .slider:before {
 }
 
 .tickets .container .cta-card {
-    background-color: white !important;
+  background-color: white !important;
 }
 .cta-card {
   position: relative;
@@ -1927,13 +1943,37 @@ footer {
 
 .sponsorship-price {
   font-size: 2.5rem;
-  font-weight: 700;
-  line-height: 1;
+  font-weight: 800;
   color: var(--color-amber-500);
+  line-height: 1;
+  text-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
+  padding: 1.5rem;
+  background: linear-gradient(
+    145deg,
+    rgba(245, 158, 11, 0.08),
+    rgba(245, 158, 11, 0.12)
+  );
+  border-radius: var(--radius-lg);
+  margin: 0 auto;
+  max-width: 200px;
 }
 
-.sponsorship-card.premium .sponsorship-price {
-  color: #9333ea; /* Purple for premium */
+.sponsorship-card.premium::after {
+  content: "PREMIUM";
+  position: absolute;
+  top: 1rem;
+  right: -2rem;
+  background: linear-gradient(
+    135deg,
+    var(--color-amber-500),
+    var(--color-amber-600)
+  );
+  color: var(--color-black);
+  padding: 0.5rem 3rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  transform: rotate(45deg);
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.2);
 }
 
 .sponsorship-features {
@@ -2042,140 +2082,459 @@ footer {
 
 /* Testimonial Carousel */
 .testimonial-carousel {
-    position: relative;
-    width: 100%;
-    height: 400px;
-    overflow: hidden;
-    border-radius: var(--radius-lg);
-    background: var(--surface-color-2);
-    border: 1px solid var(--border-color);
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--surface-color-2);
+  border: 1px solid var(--border-color);
 }
 
 .testimonial-slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-    padding: var(--spacing-md);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  padding: var(--spacing-md);
 }
 
 .testimonial-slide.active {
-    opacity: 1;
+  opacity: 1;
 }
 
 .testimonial-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    text-align: center;
-    gap: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  gap: var(--spacing-md);
 }
 
 .testimonial-image {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid var(--primary);
-    box-shadow: var(--shadow-color);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--primary);
+  box-shadow: var(--shadow-color);
 }
 
 .testimonial-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .testimonial-text {
-    max-width: 600px;
+  max-width: 600px;
 }
 
 .testimonial-text .quote {
-    font-size: 1.25rem;
-    line-height: 1.6;
-    color: var(--text-color);
-    font-style: italic;
-    margin-bottom: var(--spacing-md);
-    position: relative;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  font-style: italic;
+  margin-bottom: var(--spacing-md);
+  position: relative;
 }
 
 .testimonial-text .quote::before,
 .testimonial-text .quote::after {
-    content: '"';
-    color: var(--primary);
-    font-size: 2rem;
-    position: absolute;
+  content: '"';
+  color: var(--primary);
+  font-size: 2rem;
+  position: absolute;
 }
 
 .testimonial-text .quote::before {
-    top: -20px;
-    left: -20px;
+  top: -20px;
+  left: -20px;
 }
 
 .testimonial-text .quote::after {
-    bottom: -40px;
-    right: -20px;
+  bottom: -40px;
+  right: -20px;
 }
 
 .testimonial-author h4 {
-    color: var(--primary);
-    font-size: 1.25rem;
-    margin-bottom: 0.25rem;
+  color: var(--primary);
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
 }
 
 .testimonial-author p {
-    color: var(--text-color-secondary);
-    font-size: 0.9rem;
+  color: var(--text-color-secondary);
+  font-size: 0.9rem;
 }
 
 /* Carousel Navigation */
 .carousel-nav {
-    position: absolute;
-    bottom: var(--spacing-md);
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 0.5rem;
-    z-index: 10;
+  position: absolute;
+  bottom: var(--spacing-md);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
 }
 
 .carousel-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--surface-color-3);
-    border: 1px solid var(--border-color);
-    cursor: pointer;
-    transition: var(--transition-normal);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--surface-color-3);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: var(--transition-normal);
 }
 
 .carousel-dot.active {
-    background: var(--primary);
-    border-color: var(--primary);
-    transform: scale(1.2);
+  background: var(--primary);
+  border-color: var(--primary);
+  transform: scale(1.2);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .testimonial-carousel {
-        height: 500px;
-    }
-    
-    .testimonial-content {
-        padding: var(--spacing-sm);
-    }
-    
-    .testimonial-text .quote {
-        font-size: 1.1rem;
-    }
-    
-    .testimonial-image {
-        width: 100px;
-        height: 100px;
-    }
+  .testimonial-carousel {
+    height: 500px;
+  }
+
+  .testimonial-content {
+    padding: var(--spacing-sm);
+  }
+
+  .testimonial-text .quote {
+    font-size: 1.1rem;
+  }
+
+  .testimonial-image {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* Ticket Section Styles */
+.tickets {
+  padding: 6rem 0;
+  background: linear-gradient(
+    135deg,
+    rgba(17, 24, 39, 0.95),
+    rgba(31, 41, 55, 0.95)
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.tickets::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(245, 158, 11, 0.08) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.ticket-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.ticket-card {
+  background: linear-gradient(
+    145deg,
+    rgba(17, 24, 39, 0.8),
+    rgba(31, 41, 55, 0.8)
+  );
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  transform: translateY(0);
+}
+
+.ticket-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.ticket-card.featured {
+  border-color: var(--color-amber-500);
+  background: linear-gradient(
+    145deg,
+    rgba(17, 24, 39, 0.9),
+    rgba(31, 41, 55, 0.9)
+  );
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.1);
+}
+
+.ticket-card.premium {
+  border-color: var(--color-amber-500);
+  background: linear-gradient(
+    145deg,
+    rgba(17, 24, 39, 0.9),
+    rgba(31, 41, 55, 0.9)
+  );
+  position: relative;
+}
+
+.ticket-card.premium::after {
+  content: "PREMIUM";
+  position: absolute;
+  top: 1rem;
+  right: -2rem;
+  background: linear-gradient(
+    135deg,
+    var(--color-amber-500),
+    var(--color-amber-600)
+  );
+  color: var(--color-black);
+  padding: 0.5rem 3rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  transform: rotate(45deg);
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.2);
+}
+
+.ticket-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.ticket-header h3 {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-white);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.ticket-price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(
+    145deg,
+    rgba(245, 158, 11, 0.08),
+    rgba(245, 158, 11, 0.12)
+  );
+  border-radius: var(--radius-lg);
+  margin: 0 auto;
+  max-width: 200px;
+  padding: 1.5rem;
+}
+.pricingParCont {
+  display: grid;
+  gap: 10rem;
+}
+.discounted-price {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--color-amber-500);
+  line-height: 1;
+  text-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
+}
+
+.ticket-features {
+  margin-bottom: 2.5rem;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  color: var(--color-gray-300);
+  transition: transform 0.3s ease;
+}
+
+.feature:hover {
+  transform: translateX(5px);
+}
+
+.feature i {
+  color: var(--color-amber-500);
+  font-size: 1.25rem;
+  background: linear-gradient(
+    145deg,
+    rgba(245, 158, 11, 0.08),
+    rgba(245, 158, 11, 0.12)
+  );
+  padding: 0.5rem;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-block {
+  background: linear-gradient(
+    135deg,
+    var(--color-amber-500),
+    var(--color-amber-600)
+  );
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--radius-lg);
+  color: var(--color-black);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-block::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.btn-block:hover::before {
+  left: 100%;
+}
+
+.btn-block:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.25);
+}
+
+/* Sponsorship Section Styles */
+.sponsorship-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+.sponsorship-card {
+  background: linear-gradient(
+    145deg,
+    rgba(17, 24, 39, 0.8),
+    rgba(31, 41, 55, 0.8)
+  );
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.sponsorship-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.sponsorship-card.featured {
+  background: linear-gradient(
+    145deg,
+    rgba(17, 24, 39, 0.9),
+    rgba(31, 41, 55, 0.9)
+  );
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.1);
+}
+
+.sponsorship-card.premium {
+  background: linear-gradient(
+    145deg,
+    rgba(17, 24, 39, 0.9),
+    rgba(31, 41, 55, 0.9)
+  );
+}
+
+.sponsorship-price {
+  background: linear-gradient(
+    145deg,
+    rgba(245, 158, 11, 0.08),
+    rgba(245, 158, 11, 0.12)
+  );
+  text-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
+}
+
+.sponsorship-features {
+  margin-bottom: 2.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .ticket-grid,
+  .sponsorship-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .ticket-card,
+  .sponsorship-card {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .ticket-header h3,
+  .sponsorship-header h3 {
+    font-size: 1.5rem;
+  }
+
+  .discounted-price,
+  .sponsorship-price {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ticket-card,
+  .sponsorship-card {
+    padding: 1.5rem;
+  }
+
+  .feature {
+    font-size: 0.9rem;
+  }
+
+  .feature i {
+    font-size: 1rem;
+    width: 2rem;
+    height: 2rem;
+  }
 }
