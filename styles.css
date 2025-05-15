@@ -134,7 +134,8 @@ section {
 .section-header {
   text-align: center;
   max-width: 800px;
-  margin: 0 auto 4rem;
+  margin: 0 auto;
+  padding-bottom: 4rem;
 }
 
 .section-tag {
@@ -569,8 +570,7 @@ p {
 }
 
 .achievement-card {
-  top: 10%;
-  left: -10%;
+  bottom: 0px;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -640,11 +640,10 @@ p {
 
 @media (max-width: 768px) {
   .floating-card {
-    position: relative;
-    top: auto;
+    /* position: relative; */
     left: auto;
     right: auto;
-    bottom: auto;
+    bottom: 0px;
     margin: 1.5rem 0;
     max-width: 100%;
   }
@@ -1754,6 +1753,7 @@ footer {
 
 .footer-cta {
   text-align: center;
+  padding-block: 50px;
 }
 
 .footer-cta h4 {
@@ -1814,6 +1814,7 @@ footer {
   .footer-cta {
     width: 35%;
     text-align: left;
+    padding-block: 0px;
   }
 }
 
@@ -2344,6 +2345,10 @@ footer {
   margin: 0 auto;
   max-width: 200px;
   padding: 1.5rem;
+}
+.original-price {
+  text-decoration: line-through;
+  color: var(--color-gray-300);
 }
 .pricingParCont {
   display: grid;
